@@ -1,9 +1,10 @@
 import { GraphQLObjectType, GraphQLList, GraphQLString, GraphQLInt, GraphQLBoolean } from 'graphql';
 import categoryType from './category';
 import tagType from './tag';
+import mediaType from './media';
 import authorType from './author';
 // import meta as metaType from './meta';
-import { getCategoryById, getTagById, getMetaById } from '../../requester';
+import { getCategoryById, getTagById, getMetaById, getMediaById } from '../../requester';
 
 // Define the post type
 export default new GraphQLObjectType({
@@ -30,7 +31,7 @@ export default new GraphQLObjectType({
     excerpt: { type: GraphQLString, resolve: (post) => post.excerpt.rendered },
     stripped_excerpt: { type: GraphQLString, resolve: (post) => post.excerpt.rendered.replace(/<(?:.|\n)*?>/gm, '') },
     excerpt_protected: { type: GraphQLString, resolve: (post) => post.excerpt.protected },
-    featured_media: { type: GraphQLInt },
+    featured_media: { type: mediaType, resolve: (post) => getMediaById(post.featured_media) },
     categories: {
       type: new GraphQLList(categoryType),
       resolve: (post) => post.categories.map(getCategoryById),

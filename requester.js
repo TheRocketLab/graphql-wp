@@ -14,6 +14,7 @@ export const getTagById = (id) => request('/tags/' + id);
 export const getMetaById = (id) => request('/metas/' + id);
 export const getUsers = (id) => request('/users/');
 export const getUserById = (id) => request('/users/' + id);
+export const getMediaById = (id) => request('/media/' + id);
 
 export const getPosts = ({ search }) => {
   if (!search) return request(`/posts`);
