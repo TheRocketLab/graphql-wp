@@ -7,6 +7,6 @@ export default new GraphQLObjectType({
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     link: { type: GraphQLString },
-    count: { type: GraphQLString, resolve(test) {console.log(test)} },
+    count: { type: GraphQLString },
   },
 });

@@ -9,7 +9,13 @@ const request = (uri) => {
 };
 
 export const getCategoryById = (id) => request('/categories/' + id);
-export const getPosts = () => request('/posts/');
 export const getPostById = (id) => request('/posts/' + id);
 export const getTagById = (id) => request('/tags/' + id);
 export const getMetaById = (id) => request('/metas/' + id);
+export const getUsers = (id) => request('/users/');
+export const getUserById = (id) => request('/users/' + id);
+
+export const getPosts = ({ search }) => {
+  if (!search) return request(`/posts`);
+  return request(`/posts?search=${search}`);
+}
