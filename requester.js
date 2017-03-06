@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import config from './config';
+import url from 'url';
 
 const API = `${config.host}/wp-json/wp/v2`;
 
@@ -16,7 +17,11 @@ export const getMediaByIds = (ids) => request('/media?include=' + ids.join(','))
 
 // standalone request
 export const getUsers = (id) => request('/users/');
-export const getPosts = ({ search }) => {
-  if (!search) return request(`/posts`);
+export const getPosts = ({ search, order, orderBy }) => {
+  const qs = [];
+  if (search) qs.push({ search });
+  if (order) qs.push({ order });
+  if (orderBy) qs.push({ orderBy });
+
   return request(`/posts?search=${search}`);
 }
